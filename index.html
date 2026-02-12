@@ -19,13 +19,19 @@ body{
     position:fixed;
     width:100%;
     height:100%;
-    background-size:cover;
+    background-size:contain;      /* Resmi kesmez */
     background-position:center;
+    background-repeat:no-repeat;
+    background-color:black;       /* Kenarlarda boşluk olursa siyah görünür */
     opacity:0;
     transition:1.5s ease-in-out;
     z-index:0;
 }
-
+@media (max-width:768px){
+    .slide{
+        background-size:100% auto;   /* Mobilde tam genişlik */
+    }
+}
 /* Şifre */
 #login{
     position:fixed;
@@ -147,8 +153,8 @@ body{
 <span id="countText">18</span>
 </div>
 
-<audio id="bgMusic" src="muzik.mp3" autoplay loop></audio>
-
+<audio id="bgMusic" src="muzik.mp3" loop></audio>
+    
 <div id="darkOverlay"></div>
 <div id="flowText"></div>
 <div id="bigFinal"></div>
@@ -161,10 +167,15 @@ body{
 /* Şifre */
 function checkPassword(){
     if(document.getElementById("password").value==="0407"){
-        document.getElementById("login").style.display="none";
-        startSlideshow();
-        startCountdown();
-    }else{
+    document.getElementById("login").style.display="none";
+
+    const music = document.getElementById("bgMusic");
+    music.volume = 1;
+    music.play();   // 👈 Manuel başlatıyoruz
+
+    startSlideshow();
+    startCountdown();
+}else{
         alert("Yanlış şifre");
     }
 }
